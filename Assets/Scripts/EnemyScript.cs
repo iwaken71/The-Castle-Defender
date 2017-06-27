@@ -3,29 +3,36 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour {
 
-	private Transform _gate;
+	private Transform _gatePoint;
+	private GameObject[] _gate;
 	private NavMeshAgent _navMeshAgent;
+	float _timer = 0f;
 
 	private void Start () {
 
-		_gate = GameObject.Find ("Castle").transform.Find ("Gate");
+		_gatePoint = GameObject.Find ("Castle").transform.Find ("Gate");
+		_gate = GameObject.FindGameObjectsWithTag ("Gate");
 		_navMeshAgent = GetComponent <NavMeshAgent> ();
 
 	}
 
 	private void Update () {
 
-		_navMeshAgent.SetDestination (_gate.position);
+		_navMeshAgent.SetDestination (_gatePoint.position);
 
 	}
 
-	private void OnCollisionStay (Collision _collision) {
+	private void OnTriggerStay (Collider _collider) {
 
-		if (_collision.gameObject.tag == "Gate") {
-
-			float _timer = 0f;
+		if (_collider.gameObject.tag == "GateChecker") {
 
 			_timer += Time.deltaTime;
+
+			if (_timer > 5f) {
+
+
+
+			}
 
 		}
 
